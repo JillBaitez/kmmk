@@ -372,7 +372,37 @@ const BusController = {
   },
 
   _setupOs() {
-    // Offscreen document setup - minimal implementation
+    console.log('[BusController] Setting up Offscreen (os) listeners.');
+
+    // Relay messages from child iframe (0i.js) UP to the service worker
+    window.addEventListener('message', (event) => {
+      if (!this._isBusMsg(event.data) || event.source !== this._iframe?.contentWindow) return;
+      const message = event.data;
+      console.log('[BusController-os] Received message from iframe, forwarding to SW:', message.name);
+      this.send(message.name, ...(message.args || []));
+    });
+
+    // Relay messages from the service worker DOWN to the child iframe (0i.js)
+    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+      if (!this._isBusMsg(message)) return true;
+
+      if (this._iframe && this._iframe.contentWindow) {
+        const requestId = this._generateId();
+        message.reqId = requestId;
+
+        const responseHandler = async (event) => {
+          if (event.source === this._iframe.contentWindow && event.data?.resId === requestId) {
+            window.removeEventListener('message', responseHandler);
+            const deserialized = await this._deserialize(event.data.result);
+            sendResponse(deserialized);
+          }
+        };
+        window.addEventListener('message', responseHandler);
+
+        this._iframe.contentWindow.postMessage(message, '*');
+      }
+      return true; // keep channel open for async response
+    });
   },
 
   _setupOi() {
