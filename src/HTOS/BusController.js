@@ -122,7 +122,7 @@ const env = {
 // =============================================================================
 
 const data = {
-  name: 'htos', // Updated from 'HTOS1'
+  name: '__htos_global', // Align app name with oi.js bus for cross-context messaging
 };
 
 // =============================================================================
@@ -290,7 +290,7 @@ const BusController = {
     // Background script setup
     console.log('[BusController] Setting up Service Worker (bg) listeners.');
     // For blob handling with OS
-    this._channel = new BroadcastChannel('htos-bus-channel');
+    this._channel = new BroadcastChannel('bus.channel');
 
     chrome.runtime.onMessage.addListener((e, t, n) => {
       if (!this._isBusMsg(e)) return true;
@@ -298,7 +298,8 @@ const BusController = {
       // Special handler for the offscreen ping. Acknowledge it immediately.
       if (e.name === 'startup.oiReady' || e.name === 'startup.0iReady') {
         console.log('[BusController-bg] Acknowledging offscreen ping from:', t.url);
-        n({ ok: true });
+        // Respond with a serialized primitive so callers relying on _deserialize() can consume it.
+        n(this._serialize(true));
         return true; // Required to indicate an async response
       }
       
