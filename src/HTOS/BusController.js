@@ -290,15 +290,15 @@ const BusController = {
     // Background script setup
     console.log('[BusController] Setting up Service Worker (bg) listeners.');
     // For blob handling with OS
-    this._channel = new BroadcastChannel('bus.channel');
+    this._channel = new BroadcastChannel('htos-bus-channel');
 
     chrome.runtime.onMessage.addListener((e, t, n) => {
-      if (!this._isBusMsg(e)) return;
+      if (!this._isBusMsg(e)) return true;
       
       // Special handler for the offscreen ping. Acknowledge it immediately.
       if (e.name === 'startup.oiReady' || e.name === 'startup.0iReady') {
         console.log('[BusController-bg] Acknowledging offscreen ping from:', t.url);
-        n(this._serialize({ ok: true }));
+        n({ ok: true });
         return true; // Required to indicate an async response
       }
       

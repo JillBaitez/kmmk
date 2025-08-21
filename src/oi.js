@@ -501,4 +501,801 @@ let htosApp;
       new Mutex());
     var sha3WasmConfig = {
         name: 'sha3',
-        data: 'AGFzbQEAAAABFARgAAF/YAF/AGACf38AYAN/f38AAwgHAAEBAgEAAwUEAQECAgYOAn8BQZCNBQt/AEGACAsHcAgGbWVtb3J5AgAOSGFzaF9HZXRCdWZmZXIAAAlIYXNoX0luaXQAAQtIYXNoX1VwZGF0ZQACCkhhc2hfRmluYWwABA1IYXNoX0dldFN0YXRlAAUOSGFzaF9DYWxjdWxhdGUABgpTVEFURV9TSVpFAwEKqBwHBQBBgAoL1wMAQQBCADcDgI0BQQBCADcD+IwBQQBCADcD8IwBQQBCADcD6IwBQQBCADcD4IwBQQBCADcD2IwBQQBCADcDoiwBQQBCADcDyIwBQQBCADcDwIwBQQBCADcDuIwBQQBCADcDsIwBQQBCADcDqIwBQQBCADcDoIwBQQBCADcDmIwBQQBCADcDkIwBQQBCADcDiIwBQQBCADcDgIwBQQBCADcD+IsBQQBCADcD8IsBQQBCADcD6IsBQQBCADcD4IsBQQBCADcD2IsBQQBCADcDoisBQQBCADcDyIsBQQBCADcDwIsBQQBCADcDuIsBQQBCADcDsIsBQQBCADcDqIsBQQBCADcDoIsBQQBCADcDmIsBQQBCADcDkIsBQQBCADcDiIsBQQBCADcDgIsBQQBCADcD+IoBQQBCADcD8IoBQQBCADcD6IoBQQBCADcD4IoBQQBCADcD2IoBQQBCADcDoioBQQBCADcDyIoBQQBCADcDwIoBQQBCADcDuIoBQQBCADcDsIoBQQBCADcDqIoBQQBCADcDoIoBQQBCADcDmIoBQQBCADcDkIoBQQBCADcDiIoBQQBCADcDgIoBQQBBwAwgAEEBdGtBA3Y2AoyNAUEAQQA2AoiNAQuMAwEIfwJAQQAoAoiNASIBQQBIDQBBACABIABqQQAoAoyNASICcDYCiI0BAkACQCABDQBBgAohAwwBCwJAIAIgAWsiBCAAIAQgAEkbIgNFDQAgA0EDcSEFQQAhBgJAIANBBEkNACABQYCKAWohByADQXxxIQhBACEGA0AgByAGaiIDQcgBaiAGQYAKai0AADoAACADQckBaiAGQYEKai0AADoAACADQcoBaiAGQYEKai0AADoAACADQcsBaiAGQYMKai0AADoAACAIIAZBBGoiBkcNAAsLIAVFDQAgAUHIiwFqIQMDQCADIAZqIAZBgApqLQAAOgAAIAZBAWohBiAFQX9qIgUNAAsLIAQgAEsNAUHIiwEgAhADIAAgBGshACAEQYAKaiEDCwJAIAAgAkkNAANAIAMgAhADIAMgAmohAyAAIAJrIgAgAk8NAAsLIABFDQBBACECQcgBIQYDQCAGQYCKAWogAyAGakG4fmotAAA6AAAgBkEBaiEGIAAgAkEBaiICQf8BcUsNAAsLC+QLAS1+IAApA0AhAkEAKQPAigEhAyAAKQM4IQRBACkDuIoBIQUgACkDMCEGQQApA7CKASEHIAApAyghCEEAKQOoigEhCSAAKQMgIQpBACkDoIoBIQsgACkDGCEMQQApA5iKASENIAApAxAhDkEAKQOQigEhDyAAKQMIIRBBACkDiIoBIREgACkDACESQQApA4CKASETQQApA8iKASEUAkACQCABQcgASw0AQQApA9CKASEVQQApA+CKASEWQQApA9iKASEXDAELQQApA+CKASAAKQNghSEWQQApA9iKASAAKQNYhSEXQQApA9CKASAAKQNQhSEVIBQgACkDSIUhFCABQekASQ0AQQBBACkD6IoBIAApA2iFNwPoigFBAEEAKQPwigEgACkDcIU3A/CKAUEAQQApA/iKASAAKQN4hTcD+IoBQQBBACkDgIsBIAApA4ABhTcDgIsBIAFBiQFJDQBBAEEAKQOIiwEgACkDiAGFNwOIiwELIAMgAoUhGCAFIASFIRkgByAGhSEHIAkgCIUhCCALIAqFIRogDSAMhSEJIA8gDoUhCiARIBCFIQsgEyAShSEMQQApA7iLASESQQApA5CLASETQQApA+iKASEbQQApA6CLASEcQQApA/iKASENQQApA7CLASEdQQApA4iLASEOQQApA8CLASEPQQApA5iLASEeQQApA/CKASEQQQApA6iLASERQQApA4CLASEfQcB+IQADQCAaIAcgC4UgF4UgH4UgEYVCAYmFIBSFIBCFIB6FIA+FIQIgDCAZIAqFIBaFIA6FIB2FQgGJhSAIhSAVhSANhSAchSIDIAeFISAgCSAIIAyFIBWFIA2FIByFQgGJhSAYhSAbhSAThSAShSIEIA+FISEgGCAKIBQgGoUgEIUgHoUgD4VCAYmFIBmFIBaFIA6FIB2FIgWFQjeJIiIgCyAYIAmFIBuFIBOFIBKFQgGJhSAHhSAXhSAfhSARhSIGIAqFQj6JIiNCf4WDIAMgEYVCAokiJIUhDyANIAKFQimJIiUgBCAQhUIniSImQn+FgyAihSERIBIgBYVCOIkiEiAGIA6FQg+JIidCf4WDIAMgF4VCCokiKIUhDiAEIBqFQhuJIikgKCAIIAKFQiSJIipCf4WDhSENIAYgGYVCBokiKyADIAuFQgGJIixCf4WDIBwgAoVCEokiLYUhECArIAQgHoVCCIkiLiAbIAWFQhmJIhtCf4WDhSEXIAYgHYVCPYkiGSAEIBSFQhSJIgQgCSAFhUIciSIIQn+Fg4UhFCAIIBlCf4WDIAMgH4VCLYkiA4UhGCAZIANCf4WDIBSgAoVCA4kiCYUhGSAEIAMgCUJ/hYOFIQcgCSAEQn+FgyAIhSEIIAwgAoUiAiAhQg6JIgNCf4WDIBMgBYVCFYkiBIUhCSAGIBaFQiuJIgUgAyAEQn+Fg4UhCiAEIAVCf4WDICBCLIkiBIUhCyAAQdAJaikDACAFIARCf4WDhSAChSEMICcgKEJ/hYMgKoUiBSEfIAMgBCACQn+Fg4UiAiEaICogKUJ/hYMgEoUiAyEeIC0gLkJ/hYMgG4UiBCEWICYgJCAlQn+Fg4UiBiEdIBsgK0J/hYMgLIUiKCEVICMgJiAiQn+Fg4UiIiEcIC4gLCAtQn+Fg4UiJiEbICcgKSASQn+Fg4UiJyETICMgJEJ/hYMgJYUiIyESIABBCGoiAA0AC0EAIBE3A6iLAUEAIAU3A4CLAUEAIBc3A9iKAUEAIAc3A7CKAUEAIAs3A4iKAUEAIA83A8CLAUEAIAM3A5iLAUEAIBA3A/CKAUEAIBQ3A8iKAUEAIAI3A6CKAUEAIAY3A7CLAUEAIA43A4iLAUEAIAQ3A+CKAUEAIBk3A7iKAUEAIAo3A5CKAUEAICI3A6CLAUEAIA03A/iKAUEAICg3A9CKAUEAIAg3A6iKAUEAIAw3A4CKAUEAICM3A7iLAUEAICc3A5CLAUEAICY3A+iKAUEAIBg3A8CKAUEAIAk3A5iKAQv4AgEFf0HkAEEAKAKMjQEiAUEBdmshAgJAQQAoAoiNASIDQQBIDQAgASEEAkAgASADRg0AIANByIsBaiEFQQAhAwNAIAUgA2pBADoAACADQQFqIgMgAUEAKAKIjQEiBGtJDQALCyAEQciLAWoiAyADLQAAIAByOgAAIAFBx4sBaiIDIAMtAABBgAFyOgAAQciLASABEANBAEGAgICAeDYCiI0BCwJAIAJBBEkNACACQQJ2IgNBA3EhBUEAIQQCQCADQX9qQQNJDQAgA0H8////A3EhAUEAIQNBACEEA0AgA0GACmogA0GAigFqKAIANgIAIANBhApqIANBhIoBaigCADYCACADQYgKaiADQYiKAWooAgA2AgAgA0GMCmogA0GMigFqKAIANgIAIANBEGohAyABIARBBGoiBEcNAAsLIAVFDQAgBUECdCEBIARBAnQhAwNAIANBgApqIANBgIoBaigCADYCACADQQRqIQMgAUF8aiIBDQALCwsGAEGAigEL0QYBA39BAEIANwOAjQFBAEIANwP4jAFBAEIANwPwjAFBAEIANwPojAFBAEIANwPgjAFBAEIANwPYjAFBAEIANwPQjAFBAEIANwPIjAFBAEIANwPAjAFBAEIANwO4jAFBAEIANwOwjAFBAEIANwOojAFBAEIANwOgjAFBAEIANwOYjAFBAEIANwOQjAFBAEIANwOIjAFBAEIANwOAjAFBAEIANwPiwFBAEIANwPwiwFBAEIANwPoiwFBAEIANwPgiwFBAEIANwPYiwFBAEIANwPQiwFBAEIANwPIiwFBAEIANwPAiwFBAEIANwO4iwFBAEIANwOwiwFBAEIANwOoiwFBAEIANwOgiwFBAEIANwOYiwFBAEIANwOQiwFBAEIANwOIiwFBAEIANwOAiwFBAEIANwP4igFBAEIANwPwigFBAEIANwPoigFBAEIANwPgigFBAEIANwPYigFBAEIANwPQigFBAEIANwPIigFBAEIANwPAigFBAEIANwO4igFBAEIANwOwigFBAEIANwOoigFBAEIANwOgigFBAEIANwOYigFBAEIANwOQigFBAEIANwOIigFBAEIANwOAiwFBAEIANwP4igFBAEIANwPwigFBAEIANwPoigFBAEIANwPgigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANYwPwigFBAEANY
+        data: 'AGFzbQEAAAABFARgAAF/YAF/AGACf38AYAN/f38AAwgHAAEBAgEAAwUEAQECAgYOAn8BQZCNBQt/AEGACAsHcAgGbWVtb3J5AgAOSGFzaF9HZXRCdWZmZXIAAAlIYXNoX0luaXQAAQtIYXNoX1VwZGF0ZQACCkhhc2hfRmluYWwABA1IYXNoX0dldFN0YXRlAAUOSGFzaF9DYWxjdWxhdGUABgpTVEFURV9TSVpFAwEKqBwHBQBBgAoL1wMAQQBCADcDgI0BQQBCADcD+IwBQQBCADcD8IwBQQBCADcD6IwBQQBCADcD4IwBQQBCADcD2IwBQQBCADcDoiwBQQBCADcDyIwBQQBCADcDwIwBQQBCADcDuIwBQQBCADcDsIwBQQBCADcDqIwBQQBCADcDoIwBQQBCADcDmIwBQQBCADcDkIwBQQBCADcDiIwBQQBCADcDgIwBQQBCADcD+IsBQQBCADcD8IsBQQBCADcD6IsBQQBCADcD4IsBQQBCADcD2IsBQQBCADcDoisBQQBCADcDyIsBQQBCADcDwIsBQQBCADcDuIsBQQBCADcDsIsBQQBCADcDqIsBQQBCADcDoIsBQQBCADcDmIsBQQBCADcDkIsBQQBCADcDiIsBQQBCADcDgIsBQQBCADcD+IoBQQBCADcD8IoBQQBCADcD6IoBQQBCADcD4IoBQQBCADcD2IoBQQBCADcDoioBQQBCADcDyIoBQQBCADcDwIoBQQBCADcDuIoBQQBCADcDsIoBQQBCADcDqIoBQQBCADcDoIoBQQBCADcDmIoBQQBCADcDkIoBQQBCADcDiIoBQQBCADcDgIoBQQBBwAwgAEEBdGtBA3Y2AoyNAUEAQQA2AoiNAQuMAwEIfwJAQQAoAoiNASIBQQBIDQBBACABIABqQQAoAoyNASICcDYCiI0BAkACQCABDQBBgAohAwwBCwJAIAIgAWsiBCAAIAQgAEkbIgNFDQAgA0EDcSEFQQAhBgJAIANBBEkNACABQYCKAWohByADQXxxIQhBACEGA0AgByAGaiIDQcgBaiAGQYAKai0AADoAACADQckBaiAGQYEKai0AADoAACADQcoBaiAGQYIKai0AADoAACADQcsBaiAGQYMKai0AADoAACAIIAZBBGoiBkcNAAsLIAVFDQAgAUHIiwFqIQMDQCADIAZqIAZBgApqLQAAOgAAIAZBAWohBiAFQX9qIgUNAAsLIAQgAEsNAUHIiwEgAhADIAAgBGshACAEQYAKaiEDCwJAIAAgAkkNAANAIAMgAhADIAMgAmohAyAAIAJrIgAgAk8NAAsLIABFDQBBACECQcgBIQYDQCAGQYCKAWogAyAGakG4fmotAAA6AAAgBkEBaiEGIAAgAkEBaiICQf8BcUsNAAsLC+QLAS1+IAApA0AhAkEAKQPAigEhAyAAKQM4IQRBACkDuIoBIQUgACkDMCEGQQApA7CKASEHIAApAyghCEEAKQOoigEhCSAAKQMgIQpBACkDoIoBIQsgACkDGCEMQQApA5iKASENIAApAxAhDkEAKQOQigEhDyAAKQMIIRBBACkDiIoBIREgACkDACESQQApA4CKASETQQApA8iKASEUAkACQCABQcgASw0AQQApA9CKASEVQQApA+CKASEWQQApA9iKASEXDAELQQApA+CKASAAKQNghSEWQQApA9iKASAAKQNYhSEXQQApA9CKASAAKQNQhSEVIBQgACkDSIUhFCABQekASQ0AQQBBACkD6IoBIAApA2iFNwPoigFBAEEAKQPwigEgACkDcIU3A/CKAUEAQQApA/iKASAAKQN4hTcD+IoBQQBBACkDgIsBIAApA4ABhTcDgIsBIAFBiQFJDQBBAEEAKQOIiwEgACkDiAGFNwOIiwELIAMgAoUhGCAFIASFIRkgByAGhSEHIAkgCIUhCCALIAqFIRogDSAMhSEJIA8gDoUhCiARIBCFIQsgEyAShSEMQQApA7iLASESQQApA5CLASETQQApA+iKASEbQQApA6CLASEcQQApA/iKASENQQApA7CLASEdQQApA4iLASEOQQApA8CLASEPQQApA5iLASEeQQApA/CKASEQQQApA6iLASERQQApA4CLASEfQcB+IQADQCAaIAcgC4UgF4UgH4UgEYVCAYmFIBSFIBCFIB6FIA+FIQIgDCAZIAqFIBaFIA6FIB2FQgGJhSAIhSAVhSANhSAchSIDIAeFISAgCSAIIAyFIBWFIA2FIByFQgGJhSAYhSAbhSAThSAShSIEIA+FISEgGCAKIBQgGoUgEIUgHoUgD4VCAYmFIBmFIBaFIA6FIB2FIgWFQjeJIiIgCyAYIAmFIBuFIBOFIBKFQgGJhSAHhSAXhSAfhSARhSIGIAqFQj6JIiNCf4WDIAMgEYVCAokiJIUhDyANIAKFQimJIiUgBCAQhUIniSImQn+FgyAihSERIBIgBYVCOIkiEiAGIA6FQg+JIidCf4WDIAMgF4VCCokiKIUhDiAEIBqFQhuJIikgKCAIIAKFQiSJIipCf4WDhSENIAYgGYVCBokiKyADIAuFQgGJIixCf4WDIBwgAoVCEokiLYUhECArIAQgHoVCCIkiLiAbIAWFQhmJIhtCf4WDhSEXIAYgHYVCPYkiGSAEIBSFQhSJIgQgCSAFhUIciSIIQn+Fg4UhFCAIIBlCf4WDIAMgH4VCLYkiA4UhGCAZIANCf4WDIBSgAoVCA4kiCYUhGSAEIAMgCUJ/hYOFIQcgCSAEQn+FgyAIhSEIIAwgAoUiAiAhQg6JIgNCf4WDIBMgBYVCFYkiBIUhCSAGIBaFQiuJIgUgAyAEQn+Fg4UhCiAEIAVCf4WDICBCLIkiBIUhCyAAQdAJaikDACAFIARCf4WDhSAChSEMICcgKEJ/hYMgKoUiBSEfIAMgBCACQn+Fg4UiAiEaICogKUJ/hYMgEoUiAyEeIC0gLkJ/hYMgG4UiBCEWICYgJCAlQn+Fg4UiBiEdIBsgK0J/hYMgLIUiKCEVICMgJiAiQn+Fg4UiIiEcIC4gLCAtQn+Fg4UiJiEbICcgKSASQn+Fg4UiJyETICMgJEJ/hYMgJYUiIyESIABBCGoiAA0AC0EAIBE3A6iLAUEAIAU3A4CLAUEAIBc3A9iKAUEAIAc3A7CKAUEAIAs3A4iKAUEAIA83A8CLAUEAIAM3A5iLAUEAIBA3A/CKAUEAIBQ3A8iKAUEAIAI3A6CKAUEAIAY3A7CLAUEAIA43A4iLAUEAIAQ3A+CKAUEAIBk3A7iKAUEAIAo3A5CKAUEAICI3A6CLAUEAIA03A/iKAUEAICg3A9CKAUEAIAg3A6iKAUEAIAw3A4CKAUEAICM3A7iLAUEAICc3A5CLAUEAICY3A+iKAUEAIBg3A8CKAUEAIAk3A5iKAQv4AgEFf0HkAEEAKAKMjQEiAUEBdmshAgJAQQAoAoiNASIDQQBIDQAgASEEAkAgASADRg0AIANByIsBaiEFQQAhAwNAIAUgA2pBADoAACADQQFqIgMgAUEAKAKIjQEiBGtJDQALCyAEQciLAWoiAyADLQAAIAByOgAAIAFBx4sBaiIDIAMtAABBgAFyOgAAQciLASABEANBAEGAgICAeDYCiI0BCwJAIAJBBEkNACACQQJ2IgNBA3EhBUEAIQQCQCADQX9qQQNJDQAgA0H8////A3EhAUEAIQNBACEEA0AgA0GACmogA0GAigFqKAIANgIAIANBhApqIANBhIoBaigCADYCACADQYgKaiADQYiKAWooAgA2AgAgA0GMCmogA0GMigFqKAIANgIAIANBEGohAyABIARBBGoiBEcNAAsLIAVFDQAgBUECdCEBIARBAnQhAwNAIANBgApqIANBgIoBaigCADYCACADQQRqIQMgAUF8aiIBDQALCwsGAEGAigEL0QYBA39BAEIANwOAjQFBAEIANwP4jAFBAEIANwPwjAFBAEIANwPojAFBAEIANwPgjAFBAEIANwPYjAFBAEIANwPQjAFBAEIANwPIjAFBAEIANwPAjAFBAEIANwO4jAFBAEIANwOwjAFBAEIANwOojAFBAEIANwOgjAFBAEIANwOYjAFBAEIANwOQjAFBAEIANwOIjAFBAEIANwOAjAFBAEIANwPiwFBAEIANwPwiwFBAEIANwPoiwFBAEIANwPgiwFBAEIANwPYiwFBAEIANwPQiwFBAEIANwPIiwFBAEIANwPAiwFBAEIANwO4iwFBAEIANwOwiwFBAEIANwOoiwFBAEIANwOgiwFBAEIANwOYiwFBAEIANwOQiwFBAEIANwOIiwFBAEIANwOAiwFBAEIANwP4igFBAEIANwPwigFBAEIANwPoigFBAEIANwPgigFBAEIANwPYigFBAEIANwPQigFBAEIANwPIigFBAEIANwPAigFBAEIANwO4igFBAEIANwOwigFBAEIANwOoigFBAEIANwOgigFBAEIANwOYigFBAEIANwOQigFBAEIANwOIigFBAEIANwOAigFBAEHADCABQQF0a0EDdjYCjI0BQQBBADYCiI0BIAAQAkHkAEEAKAKMjQEiAEEBdmshAwJAQQAoAoiNASIBQQBIDQAgACEEAkAgACABRg0AIAFByIsBaiEFQQAhAQNAIAUgAWpBADoAACABQQFqIgEgAEEAKAKIjQEiBGtJDQALCyAEQciLAWoiASABLQAAIAJyOgAAIABBx4sBaiIBIAEtAABBgAFyOgAAQciLASAAEANBAEGAgICAeDYCiI0BCwJAIANBBEkNACADQQJ2IgFBA3EhBUEAIQQCQCABQX9qQQNJDQAgAUH8////A3EhAEEAIQFBACEEA0AgAUGACmogAUGAigFqKAIANgIAIAFBhApqIAFBhIoBaigCADYCACABQYgKaiABQYiKAWooAgA2AgAgAUGMCmogAUGMigFqKAIANgIAIAFBEGohASAAIARBBGoiBEcNAAsLIAVFDQAgBUECdCEAIARBAnQhAQNAIAFBgApqIAFBgIoBaigCADYCACABQQRqIQEgAEF8aiIADQALCwsL2AEBAEGACAvQAZABAAAAAAAAAAAAAAAAAAABAAAAAAAAAIKAAAAAAAAAioAAAAAAAIAAgACAAAAAgIuAAAAAAAAAAQAAgAAAAACBgACAAAAAgAmAAAAAAACAigAAAAAAAACIAAAAAAAAAAmAAIAAAAAACgAAgAAAAACLgACAAAAAAIsAAAAAAACAiYAAAAAAAIADgAAAAAAAgAKAAAAAAACAgAAAAAAAAIAKgAAAAAAAAAoAAIAAAACAgYAAgAAAAICAgAAAAAAAgAEAAIAAAAAACIAAgAAAAIA=',
+        hash: 'f2f6f5b2',
+      },
+      sha3Mutex = new Mutex(),
+      sha3Hasher = null;
+    function validateSha3Variant(variant) {
+      return [224, 256, 384, 512].includes(variant)
+        ? null
+        : new Error('Invalid variant! Valid values: 224, 256, 384, 512');
+    }
+    // TODO: This WASM hasher is a powerful, self-contained module (Tier 3).
+    // It should be extracted into a standalone utility for cryptographic operations
+    // that can be imported by any part of the HTOS system needing hashing.
+    (new Mutex(),
+      new Mutex(),
+      new Mutex(),
+      new Mutex(),
+      new Mutex(),
+      new Mutex(),
+      new Mutex(),
+      new ArrayBuffer(8),
+      new Mutex(),
+      new ArrayBuffer(8),
+      new Mutex(),
+      new ArrayBuffer(8),
+      new Mutex(),
+      new Mutex(),
+      new Mutex(),
+      (htosApp.$hashWasm = {
+        sha3: function (data, variant = 512) {
+          if (validateSha3Variant(variant))
+            return Promise.reject(validateSha3Variant(variant));
+          const hashLengthBytes = variant / 8;
+          if (
+            sha3Hasher === null ||
+            sha3Hasher.hashLength !== hashLengthBytes
+          )
+            return (function (mutex, wasmConfig, hashLength) {
+              return asyncHelper(this, undefined, undefined, function* () {
+                const releaseLock = yield mutex.lock(),
+                  hasherInstance = yield createWasmHasher(
+                    wasmConfig,
+                    hashLength
+                  );
+                return (releaseLock(), hasherInstance);
+              });
+            })(sha3Mutex, sha3WasmConfig, hashLengthBytes).then((hasher) =>
+              (sha3Hasher = hasher).calculate(data, variant, 6)
+            );
+          try {
+            const result = sha3Hasher.calculate(data, variant, 6);
+            return Promise.resolve(result);
+          } catch (error) {
+            return Promise.reject(error);
+          }
+        },
+      }));
+  })(),
+  // TODO: The following utilities are highly portable (Tier 1) and should be
+  // moved to individual files within an HTOS /utils directory. Their direct
+  // attachment to the global `htosApp` object should be phased out in favor
+  // of ES6 module imports.
+  (() => {
+    const { $utils: utils } = htosApp;
+    utils.createPromise = () => {
+      let resolve = null,
+        reject = null;
+      const promise = new Promise((res, rej) => {
+        ((resolve = res), (reject = rej));
+      });
+      return (
+        Object.defineProperty(promise, 'resolve', {
+          get: () => resolve,
+        }),
+        Object.defineProperty(promise, 'reject', {
+          get: () => reject,
+        }),
+        promise
+      );
+    };
+  })(),
+  (() => {
+    const { $utils: utils } = htosApp;
+    utils.is = {
+      null: (value) => value === null,
+      defined: (value) => undefined !== value,
+      undefined: (value) => undefined === value,
+      nil: (value) => value == null,
+      boolean: (value) => typeof value == 'boolean',
+      number: (value) => typeof value == 'number',
+      string: (value) => typeof value == 'string',
+      symbol: (value) => typeof value == 'symbol',
+      function: (value) => typeof value == 'function',
+      map: (value) => value instanceof Map,
+      set: (value) => value instanceof Set,
+      url: (value) => value instanceof URL,
+      blob: (value) => value instanceof Blob,
+      file: (value) => value instanceof File,
+      error: (value) => value instanceof Error,
+      regexp: (value) => value instanceof RegExp,
+      array: (value) => Array.isArray(value),
+      object: (value) =>
+        Object.prototype.toString.call(value) === '[object Object]',
+      nan: (value) => Number.isNaN(value),
+      nonPrimitive: (value) =>
+        utils.is.object(value) || utils.is.array(value),
+      numeric: (value) => !utils.is.nan(Number(value)),
+      empty: (value) =>
+        !!utils.is.nil(value) ||
+        (utils.is.array(value)
+          ? value.length === 0
+          : utils.is.object(value)
+            ? Object.keys(value).length === 0
+            : !!utils.is.string(value) && value.trim().length === 0),
+    };
+  })(),
+  (() => {
+    const { $utils: utils, $bus: bus } = htosApp;
+    utils.objectUrl = {
+      create(object, autoRevokeTimeout = !1) {
+        if (!URL.createObjectURL)
+          return bus.send(
+            'utils.objectUrl.create',
+            object,
+            autoRevokeTimeout
+          );
+        const objectUrl = URL.createObjectURL(object);
+        if (autoRevokeTimeout) {
+          const timeoutMs = utils.is.number(autoRevokeTimeout)
+            ? autoRevokeTimeout
+            : 60000;
+          setTimeout(() => URL.revokeObjectURL(objectUrl), timeoutMs);
+        }
+        return objectUrl;
+      },
+      revoke(objectUrl) {
+        if (!URL.revokeObjectURL)
+          return bus.send('utils.objectUrl.revoke', objectUrl);
+        URL.revokeObjectURL(objectUrl);
+      },
+    };
+  })(),
+  (() => {
+    const { $utils: utils } = htosApp;
+    utils.pickRandom = (array) =>
+      array[Math.floor(Math.random() * array.length)];
+  })(),
+  Array.prototype.toReversed &&
+    (Array.prototype.toReversed = function () {
+      return [...this].reverse();
+    }),
+  Array.prototype.at ||
+    (Array.prototype.at = function (index) {
+      return this[index >= 0 ? index : this.length + index];
+    }),
+  Array.prototype.findLastIndex ||
+    (Array.prototype.findLastIndex = function (callback, thisArg) {
+      for (let i = this.length - 1; i >= 0; i--)
+        if (callback.call(thisArg, this[i], i, this)) return i;
+      return -1;
+    }),
+  (() => {
+    const { $utils: utils } = htosApp;
+    utils.sleep = async (durationMs) =>
+      new Promise((resolve) => {
+        setTimeout(resolve, durationMs);
+      });
+  })(),
+  (() => {
+    const { $utils: utils } = htosApp;
+    utils.waitFor = async (
+      conditionFn,
+      { interval = 100, timeout = 60000 } = {}
+    ) => {
+      if (timeout <= 0) throw new Error('$utils.waitFor: timeout exceeded');
+      const startTime = Date.now(),
+        result = await conditionFn();
+      if (result) return result;
+      await utils.sleep(interval);
+      const elapsedTime = Date.now() - startTime;
+      return utils.waitFor(conditionFn, {
+        interval: interval,
+        timeout: timeout - elapsedTime,
+      });
+    };
+  })(),
+  (() => {
+    const {
+      $ai: ai,
+      $utils: utils,
+      $bus: bus,
+      $hashWasm: hashWasm,
+    } = htosApp;
+    // TODO: This controller implements a specific Proof-of-Work (POW) solution for Arkose.
+    // The logic should be preserved but wrapped in a generic "Engine Adapter" interface
+    // as part of the HTOS Offscreen Mesh architecture. The direct dependency on the
+    // message bus should be removed in favor of a standardized adapter input/output.
+    ai.arkoseController = {
+      init() {
+        ((this._arkose = null),
+          (this._setupPromise = null),
+          (this._firstTimeFetchToken = !0),
+          (this._fetchTokenPromise = utils.createPromise()),
+          bus.on('ai.retrieveArkoseToken', this._retrieveArkoseToken, this),
+          bus.on('ai.generateProofToken', this._generateProofToken, this));
+      },
+      async _retrieveArkoseToken({
+        dx: dx,
+        config: config,
+        accessToken: accessToken,
+      }) {
+        (await this._ensureSetup(config, accessToken),
+          this._arkose.setConfig({
+            [config.dataKey]: {
+              [config.blobKey]: dx,
+            },
+          }),
+          this._firstTimeFetchToken
+            ? (this._arkose.run(), (this._firstTimeFetchToken = !1))
+            : ((this._fetchTokenPromise = utils.createPromise()),
+              this._arkose.reset()));
+        const timeoutId = setTimeout(
+            () => this._fetchTokenPromise.reject('Token fetching timed out'),
+            config.tokenFetchTimeout
+          ),
+          token = await this._fetchTokenPromise;
+        return (clearTimeout(timeoutId), token);
+      },
+      async _generateProofToken({
+        seed: seed,
+        difficulty: difficulty,
+        scripts: scripts,
+        dpl: dpl,
+      }) {
+        const dataToBase64 = (data) => {
+            const jsonString = JSON.stringify(data);
+            return btoa(
+              String.fromCharCode(...new TextEncoder().encode(jsonString))
+            );
+          },
+          startTime = performance.now(),
+          navigatorKeys = Object.keys(Object.getPrototypeOf(navigator)),
+          randomNavProperty = utils.pickRandom(navigatorKeys),
+          proofData = [
+            navigator.hardwareConcurrency + screen.width + screen.height,
+            new Date().toString(),
+            performance.memory.jsHeapSizeLimit,
+            Math.random(),
+            navigator.userAgent,
+            utils.pickRandom(scripts),
+            dpl,
+            navigator.language,
+            navigator.languages.join(','),
+            Math.random(),
+            `${randomNavProperty}-${navigator[randomNavProperty]}`,
+            utils.pickRandom(Object.keys(document)),
+            utils.pickRandom(Object.keys(window)),
+            performance.now(),
+            crypto.randomUUID(),
+          ];
+        for (let nonce = 1; nonce < 100000; nonce++) {
+          (nonce % 1000 == 0 && (await utils.sleep(150)),
+            (proofData[3] = nonce),
+            (proofData[9] = Math.round(performance.now() - startTime)));
+          const proofTokenAttempt = dataToBase64(proofData);
+          if (
+            (await hashWasm.sha3(`${seed}${proofTokenAttempt}`)).substring(
+              0,
+              difficulty.length
+            ) <= difficulty
+          )
+            return proofTokenAttempt;
+        }
+        return null;
+      },
+      async _ensureSetup(config, accessToken) {
+        if (this._setupPromise) return this._setupPromise;
+        if (
+          ((this._setupPromise = utils.createPromise()),
+          this._patchArkoseIframe(config),
+          (window.useArkoseSetupEnforcement = async (arkoseApi) => {
+            (arkoseApi.setConfig({
+              ...config.params,
+              [config.selectorKey]: '#challenge',
+              [config.onErrorKey]: (error) => {
+                this._fetchTokenPromise.reject(error);
+              },
+              [config.onCompletedKey]: (data) => {
+                this._fetchTokenPromise.resolve(data[config.resultTokenKey]);
+              },
+            }),
+              (this._arkose = arkoseApi));
+          }),
+          !document.getElementById('challenge'))
+        ) {
+          const challengeContainer = document.createElement('div');
+          ((challengeContainer.id = 'challenge'),
+            document.body.appendChild(challengeContainer));
+        }
+        const scriptElement = document.createElement('script'),
+          scriptConfig = config.script;
+        (Object.entries(scriptConfig).forEach(([key, value]) =>
+          scriptElement.setAttribute(key, value)
+        ),
+          document.head.appendChild(scriptElement),
+          await new Promise((resolve, reject) => {
+            const timeoutId = setTimeout(() => {
+              reject('Script loading timed out');
+            }, config.scriptLoadTimeout);
+            ((scriptElement.onload = () => {
+              (clearTimeout(timeoutId),
+                scriptElement.setAttribute('data-status', 'loaded'),
+                resolve());
+            }),
+              (scriptElement.onerror = () => {
+                (clearTimeout(timeoutId),
+                  scriptElement.setAttribute('data-status', 'failed'),
+                  reject('Script loading failed'));
+              }));
+          }),
+          this._setupPromise.resolve());
+      },
+      _patchArkoseIframe(config) {
+        const originalAppendChild = HTMLElement.prototype.appendChild;
+        HTMLElement.prototype.appendChild = function (...args) {
+          const element = args[0];
+          return (
+            element &&
+              utils.is.string(element.tagName) &&
+              element.tagName.toLowerCase() === 'iframe' &&
+              element.src.startsWith(config.iframeUrl) &&
+              element.setAttribute('name', `ae:${JSON.stringify(config)}`),
+            originalAppendChild.call(this, ...args)
+          );
+        };
+      },
+    };
+  })(),
+  (() => {
+    const { $ai: ai } = htosApp;
+    ai.controller = {
+      init() {
+        ai.arkoseController.init();
+      },
+    };
+  })(),
+  (() => {
+    const { $bus: bus, $env: env, $utils: utils } = htosApp;
+    // TODO: This message bus controller is tightly coupled with the original extension's
+    // architecture (e.g., distinguishing between 'pp', 'bg', 'cs', 'oi' contexts).
+    // It needs to be replaced with a generic, layered message bus implementation
+    // that aligns with the HTOS architecture. The current logic is preserved
+    // for dependency analysis and to ensure the ported script remains functional.
+    bus.controller = {
+      async init() {
+        ((bus.on = this.on.bind(this)),
+          (bus.off = this.off.bind(this)),
+          (bus.once = this.once.bind(this)),
+          (bus.send = this._wrapThrowIfError(this.send)),
+          (bus.call = this._wrapThrowIfError(this.call)),
+          (bus.poll = this.poll.bind(this)),
+          (bus.getTabId = this.getTabId.bind(this)),
+          (this._locus = env.getLocus()),
+          (this._serialize = this._serialize.bind(this)),
+          (this._handlers = {}),
+          this._is('pp')
+            ? (this._setupPp(), (this._tabId = await bus.getTabId()))
+            : this._is('bg')
+              ? ((this._blobs = {}),
+                (this._channel = new BroadcastChannel('bus.channel')),
+                this._setupBg())
+              : this._is('cs')
+                ? await this._setupCs()
+                : this._is('nj')
+                  ? this._setupNj()
+                  : this._is('os')
+                    ? ((bus.setIframe = (iframeElement) =>
+                        (this._iframe = iframeElement)),
+                      (this._iframe = null),
+                      (this._channel = new BroadcastChannel('bus.channel')),
+                      this._setupOs())
+                    : this._is('oi') && this._setupOi());
+      },
+      on(eventName, handler, thisArg = null) {
+        this._on(eventName, null, handler, thisArg);
+      },
+      off(eventName, handler = null) {
+        this._off(eventName, null, handler);
+      },
+      once(eventName, handler) {
+        const onceHandler = async (...args) => (
+          this.off(eventName, onceHandler),
+          await handler(...args)
+        );
+        this.on(eventName, onceHandler);
+      },
+      async send(eventNameOrTabId, ...args) {
+        if (utils.is.numeric(eventNameOrTabId)) {
+          const tabId = Number(eventNameOrTabId);
+          return (
+            (eventNameOrTabId = args[0]),
+            (args = args.slice(1)),
+            await this._pick([
+              this._sendToCs(tabId, eventNameOrTabId, ...args),
+              this._sendToExt(tabId, eventNameOrTabId, ...args),
+            ])
+          );
+        }
+        if (this._is('pp'))
+          return await this._sendToExt(eventNameOrTabId, ...args);
+        if (this._is('nj'))
+          return await this._sendToPage(eventNameOrTabId, ...args);
+        if (this._is('oi'))
+          return await this._sendToParent(eventNameOrTabId, ...args);
+        if (this._is('bg', 'cs', 'os'))
+          return await this._pick([
+            this._sendToExt(eventNameOrTabId, ...args),
+            this._callHandlers(
+              {
+                name: eventNameOrTabId,
+                args: args,
+              },
+              (handler) => handler.proxy
+            ),
+          ]);
+        if (this._is('fg')) {
+          if (eventNameOrTabId === 'store.actions') return;
+          if (eventNameOrTabId === 'idb.change') return;
+          bus.log(eventNameOrTabId, ...args);
+        }
+      },
+      async call(eventName, ...args) {
+        return this._callHandlers(
+          {
+            name: eventName,
+            args: args,
+          },
+          (handler) => !handler.proxy
+        );
+      },
+      async poll(eventName, ...args) {
+        return await utils.waitFor(() => this.send(eventName, ...args));
+      },
+      async getTabId() {
+        if (this._is('bg')) return null;
+        if (this._is('pp')) {
+          const tabIdFromUrl = new URL(location.href).searchParams.get(
+            'tabId'
+          );
+          if (tabIdFromUrl) return Number(tabIdFromUrl);
+        }
+        const { tabId: tabId } = await this.send('bus.getTabData');
+        return tabId;
+      },
+      _on(eventName, proxy, handler, thisArg = null) {
+        (this._handlers[eventName] || (this._handlers[eventName] = []),
+          this._is('cs', 'nj', 'oi') &&
+            this._handlers[eventName].length === 0 &&
+            this._sendToProxier('bus.proxy', eventName, !0));
+        const handlerObject = {
+          fn: handler,
+          name: eventName,
+        };
+        (proxy && (handlerObject.proxy = proxy),
+          thisArg && (handlerObject.this = thisArg),
+          this._handlers[eventName].push(handlerObject));
+      },
+      _off(eventName, proxy = null, handler = null) {
+        this._handlers[eventName] &&
+          ((this._handlers[eventName] = this._handlers[eventName].filter(
+            (handler) => {
+              const handlerMatches = !handler || handler === handler.fn,
+                proxyMatches = proxy === (handler.proxy || null);
+              return !handlerMatches || !proxyMatches;
+            }
+          )),
+          this._handlers[eventName].length === 0 &&
+            (delete this._handlers[eventName],
+            this._is('cs', 'nj', 'oi') &&
+              this._sendToProxier('bus.proxy', eventName, !1)));
+      },
+      _setupPp() {},
+      _setupBg() {},
+      async _setupCs() {},
+      _setupNj() {},
+      _setupOs() {},
+      _setupOi() {
+        window.addEventListener('message', async ({ data: data }) => {
+          if (!this._isBusMsg(data)) return;
+          const result = await this._callHandlers(data);
+          window.parent.postMessage(
+            {
+              resId: data.reqId,
+              result: result,
+            },
+            '*'
+          );
+        });
+      },
+      async _sendToExt(eventNameOrTabId, ...args) {
+        let tabId = null;
+        utils.is.numeric(eventNameOrTabId) &&
+          ((tabId = Number(eventNameOrTabId)),
+          (eventNameOrTabId = args[0]),
+          (args = args.slice(1)));
+        const serializedArgs = this._serialize(args),
+          busMessage = this._createBusMsg({
+            name: eventNameOrTabId,
+            argsStr: serializedArgs,
+            target: tabId,
+          }),
+          response = await new Promise((resolve) => {
+            try {
+              chrome.runtime.sendMessage(busMessage, (response) => {
+                chrome.runtime.lastError ? resolve(null) : resolve(response);
+              });
+            } catch (error) {
+              if (error.message === 'Extension context invalidated.') return;
+              (bus.error(error), resolve(null));
+            }
+          });
+        return await this._deserialize(response);
+      },
+      async _sendToCs(tabId, eventName, ...args) {
+        if (!chrome.tabs?.sendMessage)
+          return await this.send('bus.sendToCs', tabId, eventName, ...args);
+        const serializedArgs = this._serialize(args),
+          busMessage = this._createBusMsg({
+            name: eventName,
+            argsStr: serializedArgs,
+            target: 'cs',
+          }),
+          response = await new Promise((resolve) => {
+            chrome.tabs.sendMessage(tabId, busMessage, (response) => {
+              chrome.runtime.lastError ? resolve(null) : resolve(response);
+            });
+          });
+        return await this._deserialize(response);
+      },
+      async _sendToPage(eventName, ...args) {
+        const requestId = this._generateId(),
+          busMessage = this._createBusMsg({
+            name: eventName,
+            args: args,
+            reqId: requestId,
+            locus: this._locus,
+          });
+        return (
+          window.postMessage(busMessage, '*'),
+          await this._waitForResponseMessage(requestId)
+        );
+      },
+      async _sendToIframe(eventName, ...args) {
+        if (!this._iframe) return null;
+        const requestId = this._generateId(),
+          busMessage = this._createBusMsg({
+            name: eventName,
+            args: args,
+            reqId: requestId,
+          });
+        return (
+          this._iframe.contentWindow.postMessage(busMessage, '*'),
+          await this._waitForResponseMessage(requestId)
+        );
+      },
+      async _sendToParent(eventName, ...args) {
+        const requestId = this._generateId(),
+          busMessage = this._createBusMsg({
+            name: eventName,
+            args: args,
+            reqId: requestId,
+          });
+        return (
+          parent.postMessage(busMessage, '*'),
+          await this._waitForResponseMessage(requestId)
+        );
+      },
+      async _sendToProxier(eventName, ...args) {
+        return this._is('cs')
+          ? await this._sendToExt(eventName, ...args)
+          : this._is('nj')
+            ? await this._sendToPage(eventName, ...args)
+            : this._is('oi')
+              ? await this._sendToParent(eventName, ...args)
+              : undefined;
+      },
+      _waitForResponseMessage: async (requestId) =>
+        await new Promise((resolve) => {
+          const messageHandler = ({ data: data }) => {
+            !(!data || data.resId !== requestId) &&
+              (window.removeEventListener('message', messageHandler),
+              resolve(data.result));
+          };
+          window.addEventListener('message', messageHandler);
+        }),
+      _callHandlers(
+        { name: name, args: args, argsStr: argsStr },
+        filterFn = null
+      ) {
+        let handlers = this._handlers[name];
+        return handlers
+          ? (filterFn && (handlers = handlers.filter(filterFn)),
+            handlers.length === 0
+              ? null
+              : new Promise(async (resolve) => {
+                  argsStr && (args = await this._deserialize(argsStr));
+                  resolve(
+                    await this._pick(
+                      handlers.map(async (handler) => {
+                        try {
+                          return await handler.fn.call(handler.this, ...args);
+                        } catch (error) {
+                          return (
+                            bus.error(
+                              `failed to handle "${handler.name}".`,
+                              error
+                            ),
+                            error
+                          );
+                        }
+                      })
+                    )
+                  );
+                }))
+          : null;
+      },
+      _removeProxyHandlers(proxy) {
+        Object.keys(this._handlers).forEach((eventName) => {
+          ((this._handlers[eventName] = this._handlers[eventName].filter(
+            (handler) => handler.proxy !== proxy
+          )),
+            this._handlers[eventName].length === 0 &&
+              delete this._handlers[eventName]);
+        });
+      },
+      _serialize(data) {
+        return utils.is.nil(data)
+          ? null
+          : JSON.stringify(data, (key, value) => {
+              if (utils.is.blob(value)) {
+                if (this._is('bg')) {
+                  const blobId = this._generateId();
+                  return (
+                    (this._blobs[blobId] = value),
+                    `bus.blob.${blobId}`
+                  );
+                }
+                return `bus.blob.${utils.objectUrl.create(value, !0)}`;
+              }
+              return utils.is.error(value)
+                ? `bus.error.${value.message}`
+                : value;
+            });
+      },
+      async _deserialize(jsonString) {
+        if (!utils.is.string(jsonString)) return null;
+        const blobMap = new Map(),
+          parsedObject = JSON.parse(jsonString, (key, value) => {
+            const isString = utils.is.string(value);
+            return isString && value.startsWith('bus.blob.')
+              ? (blobMap.set(value, value.slice('bus.blob.'.length)), value)
+              : isString && value.startsWith('bus.error.')
+                ? new Error(value.slice('bus.error.'.length))
+                : value;
+          });
+        return (
+          await Promise.all(
+            [...blobMap.keys()].map(async (blobKey) => {
+              let objectUrl;
+              const blobIdentifier = blobMap.get(blobKey);
+              objectUrl = blobIdentifier.startsWith('blob:')
+                ? blobIdentifier
+                : await this._sendToExt(
+                    'bus.blobIdToObjectUrl',
+                    blobIdentifier
+                  );
+              const blob = await fetch(objectUrl).then((response) =>
+                response.blob()
+              );
+              blobMap.set(blobKey, blob);
+            })
+          ),
+          this._applyBlobs(parsedObject, blobMap)
+        );
+      },
+      _applyBlobs(data, blobMap) {
+        if (blobMap.has(data)) return blobMap.get(data);
+        if (utils.is.array(data) || utils.is.object(data))
+          for (const key in data)
+            data[key] = this._applyBlobs(data[key], blobMap);
+        return data;
+      },
+      async _blobIdToObjectUrl(blobId) {},
+      async _blobToObjectUrl(blob) {},
+      _is(...loci) {
+        return loci.includes(this._locus);
+      },
+      _isBusMsg: (message) =>
+        message && message.$bus && message.appName === htosApp.name,
+      _createBusMsg: (props) => ({
+        $bus: !0,
+        appName: htosApp.name,
+        ...props,
+      }),
+      _generateId: () =>
+        `bus-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      _wrapThrowIfError(fn) {
+        return async (...args) => {
+          const result = await fn.call(this, ...args);
+          if (utils.is.error(result)) throw result;
+          return result;
+        };
+      },
+      _pick: async (promises = []) =>
+        promises.length === 0
+          ? null
+          : await new Promise((resolve) => {
+              let resolvedCount = 0;
+              promises.forEach(async (promise) => {
+                const result = await promise;
+                return utils.is.nil(result)
+                  ? resolvedCount === promises.length - 1
+                    ? resolve(null)
+                    : void resolvedCount++
+                  : resolve(result);
+              });
+            }),
+    };
+  })(),
+  (() => {
+    const { $env: env } = htosApp;
+    env.getLocus = () => {
+      const {
+        protocol: protocol,
+        host: host,
+        pathname: pathname,
+        href: href,
+      } = location;
+      // Renamed from HTOS URL
+      return href === 'https://htos.io/oi' ||
+        href === 'http://localhost:3000/oi' ||
+        pathname === '/oi.html'
+        ? 'oi'
+        : protocol !== 'chrome-extension:' && chrome?.runtime?.getURL
+          ? 'cs'
+          : host === 'localhost:3050'
+            ? 'fg'
+            : protocol !== 'chrome-extension:'
+              ? 'nj'
+              : pathname === '/ui/index.html'
+                ? 'pp'
+                : pathname === '/offscreen.html'
+                  ? 'os'
+                  : 'bg';
+    };
+  })(),
+  (() => {
+    const { $startup: startup, $bus: bus, $ai: ai } = htosApp;
+    ((startup.controller = {
+      async init() {
+        // 1. Initialize the bus so it can listen for messages.
+        await bus.controller.init();
+        
+        // 2. Initialize the AI/Arkose controller.
+        await ai.controller.init();
+
+        // 3. Set up the listener to respond to pings from os.js.
+        //    This is the ONLY part of the handshake this script is responsible for.
+        bus.on('startup.oiReady', () => {
+          console.log('[oi.js] Received startup.oiReady ping, responding with ack.');
+          return true;
+        });
+
+        startup.logDev('oi ready and listening for pings');
+      },
+    }),
+      startup.controller.init());
+  }))();
+
+/* END FULL ORIGINAL LOGIC */
+
+// 3. GENERALIZATION & RENAMING
+// Renaming has been applied inline throughout the code. Key changes include:
+// - `HTOS1APP` -> `htosApp`
+// - `__app_HTOS` -> `__htos_global`
+// - `'https://HTOS1.ai/oi'` -> `'https://htos.io/oi'`
+
+// 4. MODULE EXPORTS
+// Export the main app object for potential integration into the HTOS runtime.
+// The script's primary effect is creating a global `htosApp` object, which is
+// preserved to maintain functionality.
+export { htosApp };
+
+// 5. DEFERRED CLEANUP FLAGS
+// TODO: Review bus.controller for replacement with a generic HTOS message bus.
+// TODO: Gut ai.arkoseController and replace with a generic proof-of-work engine adapter.
+// TODO: Extract the self-contained WASM hasher into a standalone utility.
+// TODO: Port Tier 1 utilities ($utils) into individual modules in the HTOS utils directory.
